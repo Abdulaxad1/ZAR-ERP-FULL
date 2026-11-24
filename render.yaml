@@ -1,0 +1,49 @@
+﻿services:
+  - type: web
+    name: zar-erp-backend
+    runtime: node
+    plan: free
+    region: oregon
+    repo: https://github.com/Abdulaxad1/ZAR-ERP-FULL
+    branch: main
+    buildCommand: cd backend && npm ci
+    startCommand: cd backend && npm start
+    healthCheckPath: /api/health
+    autoDeployTrigger: commit
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: zar-erp-db
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: CLIENT_ORIGIN
+        value: https://zar-erp-frontend.onrender.com
+      - key: CSP_CONNECT_ORIGINS
+        value: https://zar-erp-backend.onrender.com
+      - key: APP_URL
+        value: https://zar-erp-frontend.onrender.com
+      - key: SUPER_ADMIN_EMAIL
+        value: owner@zarerp.uz
+      - key: SUPER_ADMIN_PASSWORD
+        sync: false
+
+  - type: web
+    name: zar-erp-frontend
+    runtime: static
+    repo: https://github.com/Abdulaxad1/ZAR-ERP-FULL
+    branch: main
+    buildCommand: cd frontend && npm ci && npm run build
+    staticPublishPath: frontend/dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://zar-erp-backend.onrender.com/api
+
+databases:
+  - name: zar-erp-db
+    plan: free
+    region: oregon
+    databaseName: zar_erp_db
+    user: zar_erp_db_user
