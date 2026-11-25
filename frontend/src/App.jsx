@@ -2455,6 +2455,7 @@ function Sales({ rows, api, reload, lang, user }) {
   const [saving, setSaving] = useState(false);
   const [localError, setLocalError] = useState("");
   const [localSuccess, setLocalSuccess] = useState("");
+  const [showStock, setShowStock] = useState(false);
   const canCreateSale =
     user?.role === "COMPANY_ADMIN" ||
     user?.permissions?.includes("sales:create");
@@ -2528,6 +2529,7 @@ function Sales({ rows, api, reload, lang, user }) {
       ];
     });
     setQuantity(1);
+    setShowStock(false);
   }
 
   function updateCartQuantity(id, nextValue) {
@@ -2573,6 +2575,7 @@ function Sales({ rows, api, reload, lang, user }) {
       setPaymentMethod("cash");
       setProductId("");
       setUnitPrice(0);
+      setShowStock(false);
       setLocalSuccess(t("saleSaved"));
       await Promise.all([reload(), loadProducts()]);
     } catch (error) {
@@ -2638,6 +2641,7 @@ function Sales({ rows, api, reload, lang, user }) {
                   onChange={(e) => {
                     const id = e.target.value;
                     setProductId(id);
+                    setShowStock(false);
                     const product = products.find((item) => item.id === id);
                     setUnitPrice(Number(product?.salePrice || 0));
                   }}
@@ -2647,8 +2651,7 @@ function Sales({ rows, api, reload, lang, user }) {
                     .filter((product) => Number(product.stockPieces || 0) > 0)
                     .map((product) => (
                       <option key={product.id} value={product.id}>
-                        {product.name} · {product.sku} · {t("stock")}:{" "}
-                        {product.stockPieces}
+                        {product.name} · {product.sku}
                       </option>
                     ))}
                 </select>
@@ -2657,7 +2660,11 @@ function Sales({ rows, api, reload, lang, user }) {
                 <div className="erp-product-hint">
                   <b>{selectedProduct.name}</b>
                   <span>
-                    {t("stock")}: {selectedProduct.stockPieces} ·{" "}
+                    {showStock && (
+                      <>
+                        {t("stock")}: {selectedProduct.stockPieces} ·{" "}
+                      </>
+                    )}
                     {money(selectedProduct.salePrice, lang)}
                   </span>
                 </div>
@@ -2669,7 +2676,10 @@ function Sales({ rows, api, reload, lang, user }) {
                   min="1"
                   step="1"
                   value={quantity}
-                  onChange={(e) => setQuantity(e.target.value)}
+                  onChange={(e) => {
+                    setQuantity(e.target.value);
+                    setShowStock(true);
+                  }}
                 />
               </label>
               <label>
