@@ -1,16 +1,20 @@
-﻿require("dotenv").config();
+﻿require("dotenv").config({
+  path: require("path").resolve(__dirname, "../../.env")
+});
+
 const express = require("express");
 const cors = require("cors");
 const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
-const { sequelize } = require("./src/models");
-const authRoutes = require("./src/routes/auth.routes");
-const adminRoutes = require("./src/routes/admin.routes");
-const businessRoutes = require("./src/routes/business.routes");
-const workshopRoutes = require("./src/routes/workshop.routes");
-const { seed } = require("./src/seed");
-const { runSafeMigrations } = require("./src/config/migrations");
-const { startSubscriptionJob } = require("./src/jobs/subscription.job");
+
+const { sequelize } = require("./models");
+const authRoutes = require("./routes/auth.routes");
+const adminRoutes = require("./routes/admin.routes");
+const businessRoutes = require("./routes/business.routes");
+const workshopRoutes = require("./routes/workshop.routes");
+const { seed } = require("./seed");
+const { runSafeMigrations } = require("./config/migrations");
+const { startSubscriptionJob } = require("./jobs/subscription.job");
 
 const app = express();
 app.disable("x-powered-by");
