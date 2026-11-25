@@ -216,7 +216,9 @@
 
 .erp-checkout h4 {
   margin: 0;
-  font: 700 13px Manrope, sans-serif;
+  font:
+    700 13px Manrope,
+    sans-serif;
 }
 
 .erp-cart-list {
@@ -304,7 +306,9 @@
 
 .erp-total-final strong {
   color: #e3c27b;
-  font: 800 18px Manrope, sans-serif;
+  font:
+    800 18px Manrope,
+    sans-serif;
 }
 
 .erp-checkout-button {
@@ -428,5 +432,66 @@ button:disabled {
 }
 
 /* Additional company modules */
-.erp-form-stack{display:grid;gap:14px}.erp-permission-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.erp-checkbox-label{display:flex!important;align-items:center;gap:9px!important;min-height:37px;padding:8px 10px;border:1px solid #393a40;border-radius:7px;background:#222329;color:#bbb;font-size:10px}.erp-checkbox-label input{width:15px;min-height:15px;accent-color:#d7b46a}.erp-subscription-line{padding-top:12px;border-top:1px solid #303137}.audit-json{display:block;max-width:260px;overflow:hidden;text-overflow:ellipsis;color:#b9a477;font-size:9px}.erp-form-grid textarea{width:100%;min-height:76px;border:1px solid #393a40;border-radius:7px;background:#222329;color:#eee;padding:9px 11px;font-size:11px;resize:vertical}.erp-form-grid label{display:grid;gap:7px;color:#aaa;font-size:10px}.erp-form-grid input[type=date]{color-scheme:dark}
-@media(max-width:560px){.erp-permission-grid{grid-template-columns:1fr}}
+.erp-form-stack {
+  display: grid;
+  gap: 14px;
+}
+.erp-permission-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+.erp-checkbox-label {
+  display: flex !important;
+  align-items: center;
+  gap: 9px !important;
+  min-height: 37px;
+  padding: 8px 10px;
+  border: 1px solid #393a40;
+  border-radius: 7px;
+  background: #222329;
+  color: #bbb;
+  font-size: 10px;
+}
+.erp-checkbox-label input {
+  width: 15px;
+  min-height: 15px;
+  accent-color: #d7b46a;
+}
+.erp-subscription-line {
+  padding-top: 12px;
+  border-top: 1px solid #303137;
+}
+.audit-json {
+  display: block;
+  max-width: 260px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #b9a477;
+  font-size: 9px;
+}
+.erp-form-grid textarea {
+  width: 100%;
+  min-height: 76px;
+  border: 1px solid #393a40;
+  border-radius: 7px;
+  background: #222329;
+  color: #eee;
+  padding: 9px 11px;
+  font-size: 11px;
+  resize: vertical;
+}
+.erp-form-grid label {
+  display: grid;
+  gap: 7px;
+  color: #aaa;
+  font-size: 10px;
+}
+.erp-form-grid input[type="date"] {
+  color-scheme: dark;
+}
+@media (max-width: 560px) {
+  .erp-permission-grid {
+    grid-template-columns: 1fr;
+  }
+}
